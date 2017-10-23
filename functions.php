@@ -23,6 +23,11 @@ if ( ! class_exists( 'Timber' ) ) {
  * Instructions at: https://wordpress.org/plugins/wp-saml-auth/#installation .
  */
 function wpsax_filter_option( $value, $option_name ) {
+
+	$SAML_entity_Id   = get_option( 'SAML_entity_Id', '' );
+	$SAML_sign_on_url = get_option( 'SAML_sign_on_url', '' );
+	$SAML_x509cert    = get_option( 'SAML_x509cert', '' );
+
 	$defaults = array(
 		/**
 		 * Type of SAML connection bridge to use.
@@ -55,10 +60,10 @@ function wpsax_filter_option( $value, $option_name ) {
 			),
 			'idp'          => array(
 				// Required: Set based on provider's supplied value.
-				'entityId' => '',
+				'entityId' => $SAML_entity_Id,
 				'singleSignOnService' => array(
 					// Required: Set based on provider's supplied value.
-					'url'  => '',
+					'url'  => $SAML_sign_on_url,
 					'binding' => 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect',
 				),
 				'singleLogoutService' => array(
@@ -68,7 +73,7 @@ function wpsax_filter_option( $value, $option_name ) {
 				),
 				// Required: Contents of the IDP's public x509 certificate.
 				// Use file_get_contents() to load certificate contents into scope.
-				'x509cert' => '',
+				'x509cert' => $SAML_x509cert,
 				// Optional: Instead of using the x509 cert, you can specify the fingerprint and algorithm.
 				'certFingerprint' => '',
 				'certFingerprintAlgorithm' => '',
@@ -202,6 +207,7 @@ class P4_Master_Site extends TimberSite {
 		add_action( 'pre_get_posts', array( $this, 'tags_support_query' ) );
 		add_action( 'admin_init', array( $this, 'add_copyright_text' ) );
 		add_action( 'admin_init', array( $this, 'add_google_tag_manager_identifier_setting' ) );
+		add_action( 'admin_init', array( $this, 'add_SAML_manager_identifier_setting' ) );
 
 		remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
 		remove_action( 'wp_head', 'wp_generator' );
@@ -273,6 +279,122 @@ class P4_Master_Site extends TimberSite {
 			)
 		);
 	}
+
+
+	/**
+	 * Show SAML Entity Id field.
+	 *
+	 * @param array $args
+	 */
+	public function SAML_show_entity_id( $args ) {
+		$SAML_entity_id = get_option( 'SAML_entity_id', '' );
+
+		printf(
+			'<input type="text" name="SAML_entity_id" class="regular-text" value="%1$s" id="%2$s" />',
+			esc_attr( $SAML_entity_id ),
+			esc_attr( $args['label_for'] )
+		);
+	}
+
+	/**
+	 * Show SAML Sign On Url.
+	 *
+	 * @param array $args
+	 */
+	public function SAML_show_sign_on_url ( $args ) {
+		$SAML_sign_on_url = get_option( 'SAML_sign_on_url', '' );
+
+		printf(
+			'<input type="text" name="SAML_sign_on_url" class="regular-text" value="%1$s" id="%2$s" />',
+			esc_attr( $SAML_sign_on_url ),
+			esc_attr( $args['label_for'] )
+		);
+	}
+
+	/**
+	 * Show SAML Sign On Url.
+	 *
+	 * @param array $args
+	 */
+	public function SAML_show_x509cert ( $args ) {
+		$SAML_x509cert = get_option( 'SAML_x509cert', '' );
+
+		printf(
+			'<input type="text" name="SAML_x509cert" class="regular-text" value="%1$s" id="%2$s" />',
+			esc_attr( $SAML_x509cert ),
+			esc_attr( $args['label_for'] )
+		);
+	}
+
+	/**
+	 * Function to add SAML login fields in general options
+	 */
+	public function add_SAML_manager_identifier_setting() {
+
+		// Add SAML identifier section.
+		add_settings_section(
+			'SAML_settings',
+			'',
+			'',
+			'general'
+		);
+
+		// Register SAML manager identifier setting.
+		register_setting(
+			'general',
+			'SAML_entity_id',
+			'trim'
+		);
+
+		register_setting(
+			'general',
+			'SAML_sign_on_url',
+			'trim'
+		);
+
+		register_setting(
+			'general',
+			'SAML_x509cert',
+			'trim'
+		);
+
+		// Register the field for the "SAML entity ID" section.
+		add_settings_field(
+			'SAML_entity_id',
+			'SAML entity ID',
+			array( $this, 'SAML_show_entity_id' ),
+			'general',
+			'SAML_settings',
+			array(
+				'label_for' => 'SAML_entity_id',
+			)
+		);
+
+		// Register the field for the "SAML sign on URL".
+		add_settings_field(
+			'SAML_sign_on_url',
+			'SAML Sign On url',
+			array( $this, 'SAML_show_sign_on_url' ),
+			'general',
+			'SAML_settings',
+			array(
+				'label_for' => 'SAML_sign_on_url',
+			)
+		);
+		// Register the field for the "SAML cert".
+		add_settings_field(
+			'SAML_x509cert',
+			'SAML x509 cert',
+			array( $this, 'SAML_show_x509cert' ),
+			'general',
+			'SAML_settings',
+			array(
+				'label_for' => 'SAML_x509cert',
+			)
+		);
+
+	}
+
 
 	/**
 	 * Function to add google tag manager identifier block in general options
