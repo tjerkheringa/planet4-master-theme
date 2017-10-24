@@ -24,9 +24,11 @@ if ( ! class_exists( 'Timber' ) ) {
  */
 function wpsax_filter_option( $value, $option_name ) {
 
-	$SAML_entity_Id   = get_option( 'SAML_entity_Id', '' );
-	$SAML_sign_on_url = get_option( 'SAML_sign_on_url', '' );
-	$SAML_x509cert    = get_option( 'SAML_x509cert', '' );
+	//Retrieving from the config the values for this specific site. If they are empty the installation
+	//of the theme throws an error, so we pass on dummy values
+	$SAML_entity_Id   = get_option( 'SAML_entity_Id', 'https://accounts.google.com/o/saml2?XXXXXXXX' );
+	$SAML_sign_on_url = get_option( 'SAML_sign_on_url', 'https://accounts.google.com/o/saml2/idp?XXXXXXX' );
+	$SAML_x509cert    = get_option( 'SAML_x509cert', '-----BEGIN CERTIFICATE----- XXXXX -----END CERTIFICATE-----' );
 
 	$defaults = array(
 		/**
