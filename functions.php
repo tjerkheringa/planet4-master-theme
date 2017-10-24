@@ -38,7 +38,7 @@ function wpsax_filter_option( $value, $option_name ) {
 		 *
 		 * @param string
 		 */
-		'connection_type' => 'simplesamlphp',
+		'connection_type' => 'internal',
 		/**
 		 * Configuration options for OneLogin library use.
 		 *
@@ -89,7 +89,7 @@ function wpsax_filter_option( $value, $option_name ) {
 		 *
 		 * @param string
 		 */
-		'simplesamlphp_autoload' => dirname( __FILE__ ) . '/simplesamlphp/lib/_autoload.php',
+		'simplesamlphp_autoload' => dirname( __FILE__ ) . '../../../vendor/simplesamlphp/lib/_autoload.php',
 		/**
 		 * Authentication source to pass to SimpleSAMLphp
 		 *
