@@ -6,6 +6,9 @@
 	"repository": "git@github.com:greenpeace/planet4-master-theme.git",
 	"author": "Greenpeace International",
 	"license": "MIT",
+  "browserslist": [
+    "last 2 versions"
+  ],
   "dependencies": {
     "autoprefixer": "^7.2.5",
     "browserslist": "^2.11.3",
