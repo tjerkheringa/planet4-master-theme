@@ -12,3 +12,5 @@ Text Domain: planet4-master-theme
 Note: The css we are using lives at src/css/style.css and is automatically generated from the scss files.
 Note: This file is a placeholder
 */
+
+@import "dist/assets/css/style.css";

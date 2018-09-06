@@ -1,25 +1,38 @@
 {
-	"name": "planet4-master-theme",
+  "name": "planet4-master-theme",
 	"version": "0.1.2",
 	"description": "Master theme for the Planet 4 Wordpress project",
 	"main": "index.php",
 	"repository": "git@github.com:greenpeace/planet4-master-theme.git",
 	"author": "Greenpeace International",
 	"license": "MIT",
-	"devDependencies": {
-		"backstopjs": "^3.5.2",
-		"eslint": "^4.18.2",
-		"gulp": "^3.9.1",
-		"gulp-eslint": "^4.0.2",
-		"gulp-stylelint": "^7.0.0",
-		"minimist": "^1.2.0",
-		"stylelint": "^9.1.1"
-	},
-	"dependencies": {
-		"@fortawesome/fontawesome-free-webfonts": "^1.0.6"
-	},
-	"assets": [
-		"@fortawesome/fontawesome-free-webfonts/css/*",
-		"@fortawesome/fontawesome-free-webfonts/webfonts/*"
-	]
+  "dependencies": {
+    "autoprefixer": "^7.2.5",
+    "browserslist": "^2.11.3",
+    "cssnano": "^3.10.0",
+    "grunt": "^1.0.2",
+    "grunt-combine-media-queries": "^1.0.20",
+    "grunt-contrib-clean": "^1.1.0",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-htmlmin": "^2.4.0",
+    "grunt-contrib-uglify": "^1.0.1",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-file-append": "^0.0.7",
+    "grunt-postcss": "^0.9.0",
+    "grunt-sass": "^2.1.0",
+    "grunt-string-replace": "^1.3.1",
+    "load-grunt-tasks": "^3.5.2",
+    "pixrem": "^4.0.1",
+    "postcss-normalize": "^4.0.0",
+    "backstopjs": "^3.5.2",
+    "eslint": "^4.18.2",
+    "minimist": "^1.2.0",
+    "stylelint": "^9.1.1",
+    "@fortawesome/fontawesome-free-webfonts": "^1.0.6"
+  },
+  "assets": [
+    "@fortawesome/fontawesome-free-webfonts/css/*",
+    "@fortawesome/fontawesome-free-webfonts/webfonts/*"
+  ]
 }

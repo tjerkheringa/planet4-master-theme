@@ -4,6 +4,7 @@ node_modules/
 /main.css
 /main.css.map
 .idea
+.tmp
 yarn-error.log
 /languages/*.po~
 /languages/*.pot~
