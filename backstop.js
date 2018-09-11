@@ -1,13 +1,13 @@
 /* global require, process, module */
 
-var arguments = require('minimist')(process.argv.slice(2));
+const arguments = require('minimist')(process.argv.slice(2));
 
-var url = 'https://dev.p4.greenpeace.org/international';
+let url = 'https://k8s.p4.greenpeace.org/defaultcontent/';
 if (arguments.url) {
   url = arguments.url;
 }
 
-var paths = [
+const paths = [
   '/',
   '/act/',
   '/explore/',
@@ -17,7 +17,7 @@ var paths = [
   '/?s=food&orderby=relevant'
 ];
 
-var scenarios = [];
+let scenarios = [];
 
 for (var i = 0; i < paths.length; i++) {
   scenarios.push({
@@ -68,7 +68,7 @@ module.exports = {
   },
   'casperFlags': [],
   'engine': 'puppeteer',
-  'report': ['browser'],
+  'report': ['browser', 'CI'],
   'engineOptions': {
     'args': ['--no-sandbox']
   },
