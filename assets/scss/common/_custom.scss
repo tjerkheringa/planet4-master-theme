@@ -10,7 +10,23 @@ a.pdf-link::before {
   content: "\f1c1";
   display: inline-block;
   margin-right: 7px;
-  font-family: "Font Awesome 5 Free";
+  font: normal normal normal 14px/1 ForkAwesome;
+
+  :hover & {
+    text-decoration: none;
+  }
+}
+
+// Style external icon on links
+a.external-link::before {
+  display: inline-block;
+  content: "\f08e";
+  margin-right: 7px;
+  font: normal normal normal 14px/1 ForkAwesome;
+
+  :hover & {
+    text-decoration: none;
+  }
 }
 
 // Backwards compatibility with Font-Awesome
